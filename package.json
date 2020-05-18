@@ -1,25 +1,31 @@
 {
-  "name": "my-morgage-calculator-app",
+  "name": "my-mortgage-calculator-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "prod": "ng build --prod --base-href=/my-morgage-calculator-app/",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "pretty": "prettier --write \"./**/*.{html,css,ts,js,json}\""
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.1.6",
+    "@angular/cdk": "^9.2.3",
     "@angular/common": "~9.1.6",
     "@angular/compiler": "~9.1.6",
     "@angular/core": "~9.1.6",
     "@angular/forms": "~9.1.6",
+    "@angular/localize": "^9.1.7",
+    "@angular/material": "^9.2.3",
     "@angular/platform-browser": "~9.1.6",
     "@angular/platform-browser-dynamic": "~9.1.6",
-    "@angular/router": "~9.1.6",
-    "rxjs": "~6.5.4",
+    "@ngx-translate/core": "^12.1.2",
+    "@ngx-translate/http-loader": "^4.0.0",
+    "rxjs": "^6.5.5",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
@@ -38,6 +44,7 @@
     "karma-coverage-istanbul-reporter": "~2.1.0",
     "karma-jasmine": "~3.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
+    "prettier": "^2.0.5",
     "protractor": "~5.4.3",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",

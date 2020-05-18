@@ -1,0 +1,132 @@
+<mat-card>
+  <mat-card-header>
+    <h2 i18n [translate]="'payment.plan'"></h2>
+  </mat-card-header>
+  <mat-card-content>
+    <div mat-dialog-content>
+      <form class="example-form" (ngSubmit)="calculate()">
+        <mat-form-field appearance="fill">
+          <mat-label i18n [translate]="'mortgage.amount'"></mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="paymentPlan.mortgageAmount"
+            name="mortgageAmount"
+            (change)="calculate()"
+          />
+          <span matPrefix>$&nbsp;</span>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label i18n [translate]="'pre.payment.amount'"></mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="paymentPlan.prePaymentAmount"
+            name="amount"
+            (change)="calculate()"
+          />
+          <span matPrefix>$&nbsp;</span>
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field appearance="fill">
+          <mat-label i18n [translate]="'interest.rate'"></mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="paymentPlan.interestRate"
+            name="interestRate"
+            (change)="calculate()"
+          />
+          <span matSuffix>%&nbsp;</span>
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field appearance="fill">
+          <mat-label i18n [translate]="'amortization.period'"
+            >Amortization Period</mat-label
+          >
+          <mat-select
+            [(ngModel)]="paymentPlan.amortizationPeriodYear"
+            name="amortizationPeriodYear"
+            (ngModelChange)="calculate()"
+          >
+            <mat-option
+              *ngFor="let year of amortizationYearsList"
+              [value]="year"
+            >
+              {{ "years" | translate: { x: year } }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-select
+            [(ngModel)]="paymentPlan.amortizationPeriodMonth"
+            name="amortizationPeriodMonth"
+            (ngModelChange)="calculate()"
+          >
+            <mat-option
+              *ngFor="let month of amortizationMonthsList"
+              [value]="month"
+            >
+              {{ "months" | translate: { x: month } }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field appearance="fill">
+          <mat-label i18n [translate]="'payment.frequency'"></mat-label>
+          <mat-select
+            [(ngModel)]="paymentPlan.paymentFrequence"
+            name="paymentFrequence"
+            (ngModelChange)="calculate()"
+          >
+            <mat-option [value]="0">{{
+              "ACCELERATED_WEEKLY" | translate
+            }}</mat-option>
+            <mat-option [value]="1">{{ "WEEKLY" | translate }}</mat-option>
+            <mat-option [value]="2">{{
+              "ACCELERATED_BIWEEKLY" | translate
+            }}</mat-option>
+            <mat-option [value]="3">{{ "BIWEEKLY" | translate }}</mat-option>
+            <mat-option [value]="4">{{
+              "SEMI_MONTHLY" | translate
+            }}</mat-option>
+            <mat-option [value]="5">{{ "MONTHLY" | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label i18n [translate]="'term'"></mat-label>
+          <mat-select
+            [(ngModel)]="paymentPlan.termInYear"
+            name="termInYear"
+            (ngModelChange)="calculate()"
+          >
+            <mat-option *ngFor="let year of termsList" [value]="year"
+              >{{ "years" | translate: { x: year } }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-header>
+    <h2 i18n [translate]="'calculation.title'"></h2>
+  </mat-card-header>
+  <mat-card-content>
+    <app-calculation-summary
+      [term]="calculationResult.term"
+      [amortization]="calculationResult.amortization"
+    >
+    </app-calculation-summary>
+  </mat-card-content>
+</mat-card>
